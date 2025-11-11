@@ -1,0 +1,287 @@
+/* Search Dropdown Styles */
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 32px var(--shadow-medium);
+    z-index: var(--z-dropdown);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-fast);
+    margin-top: var(--spacing-sm);
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.search-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.search-results {
+    padding: var(--spacing-sm);
+}
+
+.search-section {
+    margin-bottom: var(--spacing-md);
+}
+
+.search-section:last-child {
+    margin-bottom: 0;
+}
+
+.search-section-title {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
+.search-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.search-item {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition-fast);
+}
+
+.search-item:hover {
+    background-color: var(--bg-secondary);
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.search-item-title {
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-xs);
+}
+
+.search-item-subtitle {
+    font-size: var(--font-size-sm);
+    color: var(--text-muted);
+}
+
+.search-no-results {
+    padding: var(--spacing-md);
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Notifications Styles */
+.notifications-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: var(--z-tooltip);
+    width: 350px;
+}
+
+.notification {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+    box-shadow: 0 4px 16px var(--shadow-medium);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all var(--transition-normal);
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.notification.removing {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.notification-content i {
+    font-size: var(--font-size-lg);
+    flex-shrink: 0;
+}
+
+.notification-message {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-sm);
+    transition: color var(--transition-fast);
+    margin-left: var(--spacing-sm);
+}
+
+.notification-close:hover {
+    color: var(--text-primary);
+}
+
+/* Notification Types */
+.notification-success {
+    border-left: 4px solid var(--success-green);
+}
+
+.notification-success .notification-content i {
+    color: var(--success-green);
+}
+
+.notification-error {
+    border-left: 4px solid var(--danger-rust);
+}
+
+.notification-error .notification-content i {
+    color: var(--danger-rust);
+}
+
+.notification-warning {
+    border-left: 4px solid var(--warning-amber);
+}
+
+.notification-warning .notification-content i {
+    color: var(--warning-amber);
+}
+
+.notification-info {
+    border-left: 4px solid var(--info-blue);
+}
+
+.notification-info .notification-content i {
+    color: var(--info-blue);
+}
+
+/* Form Validation Styles */
+.is-valid {
+    border-color: var(--success-green) !important;
+    box-shadow: 0 0 0 3px rgba(134, 176, 115, 0.15) !important;
+}
+
+.is-invalid {
+    border-color: var(--danger-rust) !important;
+    box-shadow: 0 0 0 3px rgba(183, 110, 94, 0.15) !important;
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--danger-rust);
+}
+
+.valid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: var(--spacing-xs);
+    font-size: var(--font-size-sm);
+    color: var(--success-green);
+}
+
+/* Dark Theme Support (Optional) */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --text-muted: #a0a0a0;
+    --text-light: #ffffff;
+    --border-light: #404040;
+    --border-medium: #505050;
+    --shadow-light: rgba(0, 0, 0, 0.3);
+    --shadow-medium: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .sidebar {
+    background: linear-gradient(180deg, #2d3748 0%, #1a202c 100%);
+}
+
+[data-theme="dark"] .stat-card {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
+
+[data-theme="dark"] .card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-medium);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+    .notifications-container {
+        left: 10px;
+        right: 10px;
+        width: auto;
+    }
+    
+    .search-dropdown {
+        left: -20px;
+        right: -20px;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-light: #000000;
+        --border-medium: #000000;
+        --text-muted: #333333;
+    }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .topbar,
+    .notifications-container,
+    .search-dropdown {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+    }
+    
+    .card {
+        break-inside: avoid;
+    }
+}

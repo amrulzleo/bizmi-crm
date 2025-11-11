@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizMi CRM Installation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .install-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .install-header {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            background: #e9ecef;
+            color: #6c757d;
+            position: relative;
+        }
+        .step.active {
+            background: #007bff;
+            color: white;
+        }
+        .step.completed {
+            background: #28a745;
+            color: white;
+        }
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 2px;
+            background: #e9ecef;
+        }
+        .step.completed:not(:last-child)::after {
+            background: #28a745;
+        }
+        .form-section {
+            display: none;
+        }
+        .form-section.active {
+            display: block;
+        }
+        .requirement {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .requirement:last-child {
+            border-bottom: none;
+        }
+        .requirement-status {
+            font-weight: bold;
+        }
+        .requirement-status.ok {
+            color: #28a745;
+        }
+        .requirement-status.error {
+            color: #dc3545;
+        }
+        .requirement-status.warning {
+            color: #ffc107;
+        }
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .version {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="install-container">
+        <div class="install-header">
+            <div class="logo">
+                <i class="fas fa-users-cog"></i> BizMi CRM
+            </div>
+            <div class="version">Version 1.0.0 by Amrullah Khan</div>
+            <p class="mt-2 mb-0">Professional Customer Relationship Management System</p>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step active" data-step="1"><span>1</span></div>
+            <div class="step" data-step="2"><span>2</span></div>
+            <div class="step" data-step="3"><span>3</span></div>
+            <div class="step" data-step="4"><span>4</span></div>
+            <div class="step" data-step="5"><span>5</span></div>
+        </div>
+        
+        <div class="p-4">
+            <form id="installForm">
+                
+                <!-- Step 1: Welcome -->
+                <div class="form-section active" data-section="1">
+                    <h3 class="mb-4"><i class="fas fa-home text-primary"></i> Welcome to BizMi CRM</h3>
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Thank you for choosing BizMi CRM!</h5>
+                        <p class="mb-2">This installation wizard will guide you through setting up your CRM system. The process should take just a few minutes.</p>
+                        <ul class="mb-0">
+                            <li>Check system requirements</li>
+                            <li>Configure database connection</li>
+                            <li>Set up your administrator account</li>
+                            <li>Configure basic settings</li>
+                            <li>Complete installation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">About BizMi CRM</h5>
+                            <p class="card-text">
+                                BizMi CRM is a comprehensive customer relationship management system designed 
+                                for businesses of all sizes. It helps you manage contacts, track sales opportunities, 
+                                organize activities, and grow your business efficiently.
+                            </p>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success"></i> Contact & Lead Management</li>
+                                <li><i class="fas fa-check text-success"></i> Sales Pipeline Tracking</li>
+                                <li><i class="fas fa-check text-success"></i> Activity & Task Management</li>
+                                <li><i class="fas fa-check text-success"></i> Reporting & Analytics</li>
+                                <li><i class="fas fa-check text-success"></i> Multi-user Support</li>
+                                <li><i class="fas fa-check text-success"></i> Mobile Responsive</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-end mt-4">
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                            Get Started <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 2: System Requirements -->
+                <div class="form-section" data-section="2">
+                    <h3 class="mb-4"><i class="fas fa-server text-primary"></i> System Requirements</h3>
+                    <p class="text-muted mb-4">Please ensure your server meets the following requirements:</p>
+                    
+                    <div id="requirements-check">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Server Requirements</h5>
+                                <div id="requirements-list">
+                                    <!-- Requirements will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Directory Permissions</h5>
+                                <div id="permissions-list">
+                                    <!-- Permissions will be populated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="checkRequirements()">
+                            <i class="fas fa-sync-alt"></i> Check Again
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()" id="req-next" disabled>
+                            Continue <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Database Configuration -->
+                <div class="form-section" data-section="3">
+                    <h3 class="mb-4"><i class="fas fa-database text-primary"></i> Database Configuration</h3>
+                    <p class="text-muted mb-4">Please provide your database connection details:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="db_host" class="form-label">Database Host</label>
+                                <input type="text" class="form-control" id="db_host" name="db_host" value="localhost" required>
+                                <div class="form-text">Usually 'localhost' for most hosting providers</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="db_port" class="form-label">Database Port</label>
+                                <input type="number" class="form-control" id="db_port" name="db_port" value="3306" required>
+                                <div class="form-text">Default MySQL port is 3306</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="db_name" class="form-label">Database Name</label>
+                                <input type="text" class="form-control" id="db_name" name="db_name" required>
+                                <div class="form-text">The database must already exist</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="db_prefix" class="form-label">Table Prefix (Optional)</label>
+                                <input type="text" class="form-control" id="db_prefix" name="db_prefix" value="">
+                                <div class="form-text">e.g. 'bizmi_' if you need table prefixes</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="db_username" class="form-label">Database Username</label>
+                                <input type="text" class="form-control" id="db_username" name="db_username" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="db_password" class="form-label">Database Password</label>
+                                <input type="password" class="form-control" id="db_password" name="db_password">
+                                <div class="form-text">Leave empty if no password is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Important:</strong> Make sure you have created the database and the user has all necessary privileges.
+                    </div>
+                    
+                    <div id="db-connection-result" class="mt-3"></div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="testDbConnection()">
+                            <i class="fas fa-plug"></i> Test Connection
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()" id="db-next" disabled>
+                            Continue <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Administrator Account -->
+                <div class="form-section" data-section="4">
+                    <h3 class="mb-4"><i class="fas fa-user-shield text-primary"></i> Administrator Account</h3>
+                    <p class="text-muted mb-4">Create your administrator account to manage the CRM system:</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="admin_first_name" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="admin_first_name" name="admin_first_name" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="admin_last_name" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="admin_last_name" name="admin_last_name" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="admin_email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="admin_email" name="admin_email" required>
+                        <div class="form-text">This will be used for login and system notifications</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="admin_username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="admin_username" name="admin_username" required>
+                        <div class="form-text">Choose a unique username for login</div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="admin_password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="admin_password" name="admin_password" required>
+                                <div class="form-text">Minimum 8 characters, include numbers and symbols</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="admin_password_confirm" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="admin_password_confirm" name="admin_password_confirm" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Note:</strong> You can create additional user accounts after installation is complete.
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                            Continue <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Step 5: Installation -->
+                <div class="form-section" data-section="5">
+                    <h3 class="mb-4"><i class="fas fa-cog text-primary"></i> Installation Progress</h3>
+                    
+                    <div id="installation-progress">
+                        <div class="progress mb-3" style="height: 25px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+                                 style="width: 0%" id="install-progress-bar">0%</div>
+                        </div>
+                        
+                        <div id="installation-steps">
+                            <!-- Installation steps will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div id="installation-complete" style="display: none;">
+                        <div class="alert alert-success">
+                            <h4><i class="fas fa-check-circle"></i> Installation Complete!</h4>
+                            <p class="mb-2">BizMi CRM has been successfully installed and configured.</p>
+                            <hr>
+                            <p class="mb-0">
+                                <strong>Next Steps:</strong>
+                                <br>• Log in with your administrator account
+                                <br>• Configure your company information
+                                <br>• Import your contacts and data
+                                <br>• Set up your sales pipeline
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <a href="../" class="btn btn-success btn-lg">
+                                <i class="fas fa-sign-in-alt"></i> Access BizMi CRM
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between mt-4" id="install-navigation">
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-success" onclick="startInstallation()" id="start-install">
+                            <i class="fas fa-rocket"></i> Start Installation
+                        </button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="install.js"></script>
+</body>
+</html>

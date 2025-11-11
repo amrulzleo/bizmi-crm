@@ -1,0 +1,222 @@
+<?php
+/**
+ * BizMi CRM Application Configuration
+ * 
+ * Main application configuration file
+ * Created by: Amrullah Khan
+ * Email: amrulzlionheart@gmail.com
+ * Date: November 11, 2025
+ * Version: 1.0.0
+ */
+
+// Application Environment
+define('BIZMI_ENV', 'production'); // development, staging, production
+define('BIZMI_DEBUG', BIZMI_ENV === 'development');
+
+// Application Settings
+define('APP_TIMEZONE', 'UTC');
+define('APP_LOCALE', 'en_US');
+
+// Security Settings
+define('PASSWORD_MIN_LENGTH', 8);
+define('SESSION_LIFETIME', 3600); // 1 hour
+define('REMEMBER_ME_DURATION', 2592000); // 30 days
+
+// File Upload Settings
+define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10MB
+define('ALLOWED_FILE_TYPES', [
+    'images' => ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+    'documents' => ['pdf', 'doc', 'docx', 'txt', 'rtf'],
+    'spreadsheets' => ['xls', 'xlsx', 'csv'],
+    'presentations' => ['ppt', 'pptx'],
+    'archives' => ['zip', 'rar', '7z']
+]);
+
+// Pagination Settings
+define('DEFAULT_RECORDS_PER_PAGE', 20);
+define('MAX_RECORDS_PER_PAGE', 100);
+
+// Email Settings (will be configurable via admin panel)
+define('MAIL_FROM_NAME', 'BizMi CRM');
+define('MAIL_FROM_EMAIL', 'noreply@bizmi-crm.com');
+
+// Cache Settings
+define('CACHE_ENABLED', true);
+define('CACHE_DURATION', 3600); // 1 hour
+
+// API Settings
+define('API_RATE_LIMIT', 1000); // requests per hour
+define('API_VERSION', 'v1');
+
+// Date/Time Formats
+define('DATE_FORMAT', 'Y-m-d');
+define('TIME_FORMAT', 'H:i:s');
+define('DATETIME_FORMAT', 'Y-m-d H:i:s');
+
+// Currency Settings
+define('DEFAULT_CURRENCY', 'USD');
+define('CURRENCY_POSITION', 'before'); // before, after
+
+// Company Information (defaults)
+define('DEFAULT_COMPANY_NAME', 'Your Company');
+define('DEFAULT_COMPANY_WEBSITE', '');
+define('DEFAULT_COMPANY_EMAIL', '');
+define('DEFAULT_COMPANY_PHONE', '');
+
+// System Limits
+define('MAX_USERS', 1000);
+define('MAX_CONTACTS', 50000);
+define('MAX_DEALS', 10000);
+define('MAX_ACTIVITIES', 100000);
+
+// Performance Settings
+define('DB_CONNECTION_TIMEOUT', 10);
+define('DB_QUERY_TIMEOUT', 30);
+define('HTTP_TIMEOUT', 30);
+
+// Logging Settings
+define('LOG_ENABLED', true);
+define('LOG_LEVEL', BIZMI_DEBUG ? 'debug' : 'error');
+define('LOG_MAX_SIZE', 10 * 1024 * 1024); // 10MB
+define('AUDIT_LOG_ENABLED', true);
+
+// Backup Settings
+define('BACKUP_ENABLED', true);
+define('BACKUP_FREQUENCY', 'daily'); // hourly, daily, weekly
+define('BACKUP_RETENTION_DAYS', 30);
+
+// Search Settings
+define('SEARCH_MIN_LENGTH', 3);
+define('SEARCH_MAX_RESULTS', 50);
+
+// Integration Settings
+define('INTEGRATIONS_ENABLED', true);
+define('WEBHOOK_ENABLED', true);
+define('API_ENABLED', true);
+
+// Mobile Settings
+define('MOBILE_ENABLED', true);
+define('RESPONSIVE_ENABLED', true);
+
+// Feature Flags
+define('FEATURES', [
+    'contacts' => true,
+    'organizations' => true,
+    'deals' => true,
+    'activities' => true,
+    'quotes' => true,
+    'products' => true,
+    'documents' => true,
+    'reports' => true,
+    'api' => true,
+    'mobile' => true,
+    'webhooks' => false,
+    'two_factor_auth' => false,
+    'ldap_integration' => false,
+    'sso' => false
+]);
+
+// Theme Settings
+define('DEFAULT_THEME', 'default');
+define('CUSTOM_CSS_ENABLED', true);
+define('DARK_MODE_ENABLED', true);
+
+// Notification Settings
+define('EMAIL_NOTIFICATIONS_ENABLED', true);
+define('SMS_NOTIFICATIONS_ENABLED', false);
+define('PUSH_NOTIFICATIONS_ENABLED', false);
+
+// Social Login Settings (future feature)
+define('SOCIAL_LOGIN_ENABLED', false);
+define('SOCIAL_PROVIDERS', [
+    'google' => false,
+    'microsoft' => false,
+    'github' => false
+]);
+
+// License Information
+define('LICENSE_TYPE', 'proprietary');
+define('LICENSE_HOLDER', 'Amrullah Khan');
+define('LICENSE_EMAIL', 'amrulzlionheart@gmail.com');
+
+// Version Information
+define('BUILD_DATE', '2025-11-11');
+define('BUILD_NUMBER', '1.0.0');
+
+// Error Handling
+if (BIZMI_DEBUG) {
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
+    ini_set('display_startup_errors', 0);
+    error_reporting(E_ERROR | E_WARNING | E_PARSE);
+}
+
+// Set timezone
+if (defined('APP_TIMEZONE')) {
+    date_default_timezone_set(APP_TIMEZONE);
+}
+
+// Set locale
+if (defined('APP_LOCALE')) {
+    setlocale(LC_ALL, APP_LOCALE);
+}
+
+// Memory and time limits
+ini_set('memory_limit', '256M');
+ini_set('max_execution_time', 60);
+ini_set('max_input_time', 60);
+
+// Session configuration
+ini_set('session.cookie_lifetime', SESSION_LIFETIME);
+ini_set('session.gc_maxlifetime', SESSION_LIFETIME);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.cookie_secure', isset($_SERVER['HTTPS']));
+ini_set('session.use_strict_mode', 1);
+
+// File upload limits
+ini_set('upload_max_filesize', '10M');
+ini_set('post_max_size', '12M');
+ini_set('max_file_uploads', 20);
+
+// Output compression
+if (!BIZMI_DEBUG) {
+    ini_set('zlib.output_compression', 1);
+}
+
+// Define paths for easy access
+define('PATHS', [
+    'root' => BIZMI_ROOT,
+    'app' => BIZMI_APP,
+    'config' => BIZMI_CONFIG,
+    'public' => BIZMI_PUBLIC,
+    'assets' => BIZMI_ASSETS,
+    'uploads' => BIZMI_UPLOADS,
+    'logs' => BIZMI_ROOT . '/logs',
+    'cache' => BIZMI_ROOT . '/cache',
+    'backups' => BIZMI_ROOT . '/backups'
+]);
+
+// Create directories if they don't exist
+$requiredDirs = [
+    BIZMI_UPLOADS,
+    BIZMI_ROOT . '/logs',
+    BIZMI_ROOT . '/cache',
+    BIZMI_ROOT . '/backups'
+];
+
+foreach ($requiredDirs as $dir) {
+    if (!is_dir($dir)) {
+        mkdir($dir, 0755, true);
+    }
+}
+
+// Set up error logging
+if (LOG_ENABLED) {
+    $logFile = BIZMI_ROOT . '/logs/error_' . date('Y-m-d') . '.log';
+    ini_set('log_errors', 1);
+    ini_set('error_log', $logFile);
+}
+?>

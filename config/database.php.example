@@ -1,0 +1,40 @@
+<?php
+/**
+ * BizMi CRM Database Configuration
+ * 
+ * Database connection settings
+ * Created during installation
+ * 
+ * IMPORTANT: Keep this file secure and never commit it to version control
+ */
+
+// Database Configuration
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'your_database_name');
+define('DB_USER', 'your_database_user');
+define('DB_PASS', 'your_database_password');
+define('DB_PORT', 3306);
+define('DB_CHARSET', 'utf8mb4');
+
+// Database Options
+define('DB_OPTIONS', [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false,
+    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
+]);
+
+// Database Pool Settings
+define('DB_POOL_SIZE', 10);
+define('DB_POOL_TIMEOUT', 30);
+
+// Database Backup Settings
+define('DB_BACKUP_ENABLED', true);
+define('DB_BACKUP_PATH', BIZMI_ROOT . '/backups/database/');
+define('DB_BACKUP_COMPRESSION', true);
+
+// Create backup directory if it doesn't exist
+if (DB_BACKUP_ENABLED && !is_dir(DB_BACKUP_PATH)) {
+    mkdir(DB_BACKUP_PATH, 0755, true);
+}
+?>
